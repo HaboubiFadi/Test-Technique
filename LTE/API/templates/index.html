@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Divs</title>
+    <style>
+        body {
+            background-color: lightgreen;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            width: 280px;
+            height: 330px;
+
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .card button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .card button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="card">
+            <h2>Profit/Loss Per Year</h2>
+            <p>Yearly Profit and Loss : Calculate the profit or loss by year by subtracting the total charges from the total products for each year.</p>
+            <button onclick="window.location.href='/View_Profit'">View_Profit</button>
+        </div>
+
+        <div class="card">
+            <h2>Exceptional_charges</h2>
+            <p>Exceptional Charges: Calcualte the Exceptional Charges each year ,to analyse if there are unexpected financial events impacting certain years more than others.</p>
+            <button onclick="window.location.href='/View_Exceptional_charges'">View_Exceptional_charges</button>
+        </div>
+        
+        <div class="card">
+            <h2>Expense per categorie</h2>
+            <p>Expense per categorie : Calculate the Expenses  by categorie each year ,Break down Expenses by categories to see where the most significant expenses are and explore potential cost-cutting opportunities.</p>
+            <button onclick="window.location.href='/View_Calcul_Expense_per_categorie'">Expenses per categorie</button>
+        </div>
+
+        <div class="card">
+            <h2> Profitability_Analysis </h2>
+            <p>Compare Revenues and expenses to determine the operating profit for each year. This helps gauge how efficiently the core business operations generate profit. </p>
+            <button onclick="window.location.href='/View_Calcul_profitability_analysis'">Profitability Analysis</button>
+        </div>
+
+        <div class="card">
+            <h2>Return On Investiment (ROI)</h2>
+            <p>Investment Returns: Calculate the Return On Investement , by seperating only the financial Activity from all the Revenues to assess returns on investments without the revenue from the core business Activity.</p>
+            <button onclick="window.location.href='/View_Return_on_investiment_per_year'">View_Return_on_investiment_per_year</button>
+        </div>
+        
+        <div class="card">
+            <h3>Dashboard</h3>
+            <p>This Dashboard Display in an Aesthetic way all our analysis</p>
+            <button onclick="window.location.href='/dashboard'">View Dashboard</button>
+        </div>
+    </div>
+</body>
+</html>

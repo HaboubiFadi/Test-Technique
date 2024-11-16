@@ -1,0 +1,42 @@
+version: '3.9'  # Specifies the Docker Compose file format version.
+services:
+  
+  postgres:
+      image: postgres:13 # Uses the official PostgreSQL 13 image.
+      
+      environment:
+      # Sets environment variables for PostgreSQL configuration.
+        POSTGRES_DB: postgres # Name of the default database.
+        POSTGRES_USER: admin # Username for database access.
+        POSTGRES_PASSWORD: admin  # Password for the database user.
+        
+      volumes:
+      # Mounts a volume for data storage.
+      - ./data:/var/lib/postgresql/data
+      ports:
+            # Exposes PostgreSQL on the port 5432, mapped to the container's port 5432.
+        - 5432:5432
+      restart: always   # Ensures the container restarts automatically in case of failure.
+  etl:
+    build: ./ETL   # Builds the ETL service from the Dockerfile located in the ./ETL directory.
+    
+    depends_on:
+    # Ensures the ETL service starts only after the PostgreSQL service is up and running.
+      - postgres
+  api_website: 
+    build: ./LTE/API  # Builds the API website service from the Dockerfile located in the ./LTE/API directory.
+    
+    restart: always  
+    ports:       # Exposes the API website on the host's port 8080, mapped to the container's port 8080.
+        - 8080:8080 
+    depends_on:
+      # Ensures the API website service starts only after the PostgreSQL and ETL services are running.
+
+      - postgres
+      - etl 
+
+  
+
+    
+    
+  
