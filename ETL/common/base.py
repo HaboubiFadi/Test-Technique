@@ -22,4 +22,6 @@ def session_factory(drop_tables):
     if drop_tables: 
         Base.metadata.drop_all(engine) # if drop_table is true drop all the mapped tables that been detected by the engine
     Base.metadata.create_all(engine) # Map all entites to the database 
-    return _Session() # Return session objects to perform database operations
+    return _Session(),engine # Return session objects to perform database operations
+
+    

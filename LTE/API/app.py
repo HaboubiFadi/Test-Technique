@@ -69,10 +69,38 @@ print('database_statue:',database_statue)
 def home():
     return render_template('index.html', message='Welcome to Flask!')
 import os
+"""
+This route return  the dashboard.html template that itself show our dashboard.pdf inside of it .
+
+"""
 
 @app.route('/dashboard')
 def dashboard():
     return render_template('dashboard.html')
+
+"""
+This view return a sample of the data 50 exactly and it send them as tables in html form .
+
+"""
+
+
+
+@app.route("/Sample_data")
+def View_Sample_data():
+
+    df_sample_data=Fetech_sample(db_cursor)
+    table_html=df_sample_data.to_html(classes="table table-striped", index=False)
+    return render_template("table.html", title="Sample Data 50 Row", table=table_html) # Uses Pandas’ .to_html() method to generate table HTML.
+
+
+
+
+"""
+All the routes that start with 'View_' work similarly 
+they call the specific analytical function then convert the table returned into table of html form 
+and finally send that table into a table.html template .  
+
+"""
 
 
 
@@ -128,7 +156,7 @@ def View_Return_on_investiment_per_year():
 
 
 if __name__ == '__main__':
-    #app.run(debug=True)
+
     serve(app, host="0.0.0.0", port=8080) # Production-Ready Server: Uses Waitress to deploy the app in a production-like environment.
 
 

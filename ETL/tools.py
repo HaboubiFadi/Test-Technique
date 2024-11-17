@@ -17,24 +17,25 @@ def Extract_and_Store_Records(session,Entity,url,limit=100):
     i=0
     headers={}
     headers['limit']=limit # Number of records per API call .
-    all_results=[]
-    empty_results=False
+    all_results=[]  
+    empty_results=False # variable that return true if the the api call stop returning data.
     while empty_results ==False:
-        headers['offset']=i
+        headers['offset']=i # offset is the number of the record the api start injesting From . 
         try:
-            response=requests.get(url,params=headers)    
-            result=response.json()
-            if not result['results']:
+            response=requests.get(url,params=headers)    # using the requests library to use the Api endpoint.
+            result=response.json() # Convert the incoming data into a json
+            if not result['results']: # if the api return no data the loop end.
                 empty_results=True
                 pass
             else:
-                all_results=all_results + list(result['results'])
-                print('length:',len(all_results))
+                all_results=all_results + list(result['results']) # Concat the new results with the rest of the data.
                 i+=limit
         except Exception as e :
             print('Error Happened : ',e.args)
+    #df_unique=pd.DataFrame(all_results).drop_duplicates() # Drop duplications from the dataset.
+    #all_results_clean=df.to_dict(orient='records')
     
-    all_results=pd.DataFrame(all_results).drop_duplicates() # Drop Duplication Row
-    all_results=all_results.to_dict(orient='records')  # Convert Dataframe to dict .
+    
+    
     session.bulk_insert_mappings(Entity, all_results) # Efficiently inserts multiple records in one go.
     session.commit() #  Persists changes to the database .    

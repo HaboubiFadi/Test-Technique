@@ -120,6 +120,31 @@ def Calcul_profitability_analysis(cursor):
 
 
 
+'''
+    Documentation:
+Fetech_sample :
+
+    *Fetech a sample of 50 Row from our main table.
+
+
+'''
+
+def Fetech_sample(cursor):
+    query=""" SELECT exercice_comptable as Year,type_de_resultat,produit_charge,poste,detail_postes,montant_en_eur from public.compte_resultat LIMIT 50; 
+
+"""    
+    cursor.execute(query)
+    data_sample = cursor.fetchall()
+    data_sample_df=pd.DataFrame(data_sample,columns=["Year","type_de_resultat","produit_charge","poste","detail_postes","montant_en_eur"])
+    
+    return data_sample_df
+    
+
+
+
+
+
+
 
 
 '''
@@ -129,7 +154,6 @@ Calcul_Expense_per_categorie:
     * Aggregates expenses (produit_charge = 'CHARGES') by category (poste) and year.
 
 '''
-
 
 
 
